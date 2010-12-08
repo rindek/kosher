@@ -1,0 +1,3 @@
+module Kosher
+  # Your code goes here...
+end
