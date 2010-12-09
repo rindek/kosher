@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "kosher"
   s.version     = Kosher::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Hakan Ensari"]
-  s.email       = ["code@paperca<D-§>valier.com"]
+  s.authors     = ["Paper Cavalier"]
+  s.email       = ["code@papercvalier.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Kosher validates descriptions}
+  s.description = %q{Have you ever wondered if you should buy a book?}
 
   s.rubyforge_project = "kosher"
 
