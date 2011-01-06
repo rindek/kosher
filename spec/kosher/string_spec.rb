@@ -35,6 +35,8 @@ module Kosher
     end
 
     it "does not validate damaged or worn books" do
+      this("Different").should be_kosher
+      this("Rental").should_not be_kosher
       this("Torn pages").should_not be_kosher
     end
 
