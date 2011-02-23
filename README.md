@@ -1,8 +1,6 @@
 Kosher
 ======
 
-![Walter Benjamin](https://github.com/papercavalier/kosher/raw/master/walter_benjamin.jpg)
+Kosher wraps Amazon in a loving embrace.
 
-    description = Kosher.new "A withdrawn library copy"
-    description.kosher?
-    => false
+![Walter Benjamin](https://github.com/papercavalier/kosher/raw/master/walter_benjamin.jpg)

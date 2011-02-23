@@ -1,9 +1,14 @@
-require "kosher/string"
-require "kosher/regexps"
+require 'sucker'
+require 'kosher/algorithm'
+require 'kosher/condition'
+require 'kosher/description'
+require 'kosher/item'
+require 'kosher/offer'
+require 'kosher/request'
+require 'kosher/seller'
 
 module Kosher
-  def self.new(val)
-    String.new(val)
+  def self.new(args={})
+    Request.new(args)
   end
 end
-

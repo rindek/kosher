@@ -1,9 +1,13 @@
 require "spec_helper"
 
 module Kosher
-  describe String do
-    def this(val)
-      Kosher::String.new(val)
+  describe Description do
+    def this(value)
+      Description.new(value)
+    end
+
+    it "inherits from String" do
+      Description.ancestors.should include String
     end
 
     it "validates a blank description" do
@@ -14,7 +18,7 @@ module Kosher
       this("foo").should be_kosher
     end
 
-    it "does not validate advance reviews" do
+    it "does not validate advance review copies" do
       this("Uncorrected review copy").should_not be_kosher
       this("arc").should_not be_kosher
       this("arc.").should_not be_kosher
