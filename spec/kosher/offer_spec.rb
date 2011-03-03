@@ -5,7 +5,7 @@ module Kosher
     let(:offer) { Fabricate(:offer) }
 
     describe ".build" do
-      use_vcr_cassette '0143105825', :match_requests_on  => [:host]
+      use_vcr_cassette '0143105825'
 
       let(:asin) { '0143105825' }
 

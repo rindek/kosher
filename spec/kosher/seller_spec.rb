@@ -1,9 +1,9 @@
-require "spec_helper"
+require 'spec_helper'
 
 module Kosher
   describe Seller do
     describe ".build" do
-      use_vcr_cassette "0143105825", :match_requests_on  => [:host]
+      use_vcr_cassette '0143105825'
 
       let(:asin) { '0143105825' }
 
