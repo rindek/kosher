@@ -1,12 +1,13 @@
 module Kosher
-  class Item < Struct.new(:asin, :offers)
+  class Item < Struct.new(:asin, :offers, :sales_rank)
 
     class << self
       def build(doc)
-        asin   = doc['ASIN']
-        offers = build_offers(doc['Offers']['Offer'])
+        asin       = doc['ASIN']
+        sales_rank = doc['SalesRank'].to_i
+        offers     = build_offers(doc['Offers']['Offer'])
 
-        new(asin, offers)
+        new(asin, offers, sales_rank)
       end
 
       private
