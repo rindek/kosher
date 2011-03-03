@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_dependency('sucker', '~> 1.3.1')
-  s.add_dependency('throttler', '~> 0.2.4')
   s.add_development_dependency('fabrication', '~> 0.9.5')
   s.add_development_dependency('rspec', '~> 2.5.0')
   if RUBY_VERSION.include? '1.9'
