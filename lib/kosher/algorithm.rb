@@ -17,5 +17,9 @@ module Kosher
         error['Message'].scan(/[0-9A-Z]{10}/).first rescue nil
       end.compact
     end
+
+    def response
+      @response
+    end
   end
 end
