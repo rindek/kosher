@@ -1,6 +1,8 @@
 module Kosher
   class Algorithm
     def initialize(response)
+      raise ResponseNotValidError unless response.valid?
+
       @response = response
     end
 

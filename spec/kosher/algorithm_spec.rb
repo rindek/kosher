@@ -21,6 +21,17 @@ module Kosher
       request.get
     end
 
+    describe ".new" do
+      it "raises an error if response is not valid" do
+        response = mock('Response')
+        response.stub!(:valid?).and_return(false)
+
+        expect do
+          Algorithm.new(response)
+        end.to raise_error ResponseNotValidError
+      end
+    end
+
     describe "#items" do
       it "should return found items" do
         algorithm.items.count.should eql 19
