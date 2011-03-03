@@ -24,10 +24,8 @@ module Kosher
       it "should build an item" do
         item.should be_a Item
         item.asin.should eql asin
+        item.offers_count.should be > 0
         item.sales_rank.should be > 0
-      end
-
-      it "should build the offers of an item" do
         item.offers.count.should > 0
         item.offers.first.should be_a Offer
       end
