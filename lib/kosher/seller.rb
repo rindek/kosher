@@ -16,7 +16,7 @@ module Kosher
     end
 
     def blacklisted?
-      blacklist.include? merchant_id rescue false
+      blacklist.include?(merchant_id) rescue false
     end
 
     def kosher?

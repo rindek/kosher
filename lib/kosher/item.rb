@@ -17,9 +17,8 @@ module Kosher
         [offers].flatten.compact.map do |offer|
 
           # Senify Yen because Ruby Money says so
-          price = offer['OfferListing']['Price']
-          if price['CurrencyCode'] == 'JPY'
-            price['Amount'] = price['Amount'].to_i * 100
+          if offer['OfferListing']['Price']['CurrencyCode'] == 'JPY'
+            offer['OfferListing']['Price']['Amount'] = offer['OfferListing']['Price']['Amount'].to_i * 100
           end
 
           Offer.build(offer)
