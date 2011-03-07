@@ -16,19 +16,25 @@ module Kosher
         algorithm.instance_variable_get(:@response)
       end
 
-      let(:sellers) do
-        response.find("Merchant")
+      let(:seller) do
+        docs = response.find('Merchant')
+        Seller.build(docs.first)
       end
 
-      it "builds a seller" do
-        seller = Seller.build(sellers.first)
-
+      it "populates the merchant ID of a seller" do
         seller.merchant_id.should match /^[0-9A-Z]{13,14}$/
+      end
+
+      it "populates the name of a seller" do
+        seller.name.should_not be_nil
+      end
+
+      it "populates the average rating of a seller" do
         seller.average_rating.should be_an_instance_of Float
       end
 
       it "builds a newly-launched seller" do
-        doc = sellers.detect { |doc| doc["AverageFeedbackRating"] == "0.0" }
+        doc = response.find('Merchant').detect { |doc| doc["AverageFeedbackRating"] == "0.0" }
         new_seller = Seller.build(doc)
 
         new_seller.average_rating.should eql 0.0
