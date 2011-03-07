@@ -7,6 +7,7 @@ require 'kosher/item'
 require 'kosher/offer'
 require 'kosher/request'
 require 'kosher/seller'
+require 'kosher/struct'
 
 module Kosher
   def self.new(args={})
