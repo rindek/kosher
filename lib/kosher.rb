@@ -1,4 +1,5 @@
 require 'sucker'
+require 'kosher/struct'
 require 'kosher/algorithm'
 require 'kosher/condition'
 require 'kosher/description'
