@@ -33,6 +33,11 @@ module Kosher
         offer.listing_id.should_not be_nil
       end
 
+      it "populates the exchange ID" do
+        offer = Offer.build(doc)
+        offer.exchange_id.should_not be_nil
+      end
+
       it "should handle blank descriptions" do
         doc['OfferAttributes']['ConditionNote'] = ''
         offer = Offer.build(doc)

@@ -6,6 +6,7 @@ module Kosher
     :ships_in,
     :ships_free,
     :cents,
+    :exchange_id,
     :listing_id)
 
     def self.build(doc)
@@ -20,6 +21,7 @@ module Kosher
       offer.ships_in    = listing['AvailabilityAttributes']['MaximumHours'].to_i
       offer.ships_free  = listing['IsEligibleForSuperSaverShipping'] == '1'
       offer.cents       = listing['Price']['Amount'].to_i
+      offer.exchange_id = listing['ExchangeId']
       offer.listing_id  = listing['OfferListingId']
 
       offer
