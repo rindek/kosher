@@ -2,6 +2,10 @@ require 'spec_helper'
 
 module Kosher
   describe Item do
+    it "should descend from Kosher::Struct" do
+      Item.ancestors.should include Kosher::Struct
+    end
+
     describe ".build" do
       use_vcr_cassette '0143105825'
 

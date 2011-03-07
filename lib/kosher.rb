@@ -1,4 +1,5 @@
 require 'sucker'
+require 'kosher/struct'
 require 'kosher/algorithm'
 require 'kosher/condition'
 require 'kosher/description'
@@ -7,7 +8,6 @@ require 'kosher/item'
 require 'kosher/offer'
 require 'kosher/request'
 require 'kosher/seller'
-require 'kosher/struct'
 
 module Kosher
   def self.new(args={})
