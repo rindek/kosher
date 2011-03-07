@@ -1,22 +1,25 @@
 module Kosher
-  class Condition < Struct.new(:in_words)
-    def to_i
-      case in_words
-      when 'new' then 1
-      when 'mint' then 2
-      when 'verygood' then 3
-      when 'good' then 4
-      when 'acceptable' then 5
-      else 6
-      end
+  class Condition < Struct.new(:grade)
+
+    alias_method :to_i, :grade
+
+    CONDITIONS = {
+      'new'        => 1,
+      'mint'       => 2,
+      'verygood'   => 3,
+      'good'       => 4,
+      'acceptable' => 5 }
+
+    def initialize(string = '')
+      self.grade = CONDITIONS[string] || 6
     end
 
     def kosher?
-      to_i <= 4
+      grade <= 4
     end
 
     def new?
-      in_words == 'new'
+      grade == 1
     end
 
     def used?

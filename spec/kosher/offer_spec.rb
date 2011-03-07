@@ -49,7 +49,7 @@ module Kosher
     describe "#kosher?" do
       context "when condition is kosher" do
         before do
-          offer.condition = Fabricate(:kosher_condition, :in_words => 'new')
+          offer.condition = Fabricate(:kosher_condition, :grade => 1)
         end
 
         context "when seller is kosher" do
@@ -99,7 +99,7 @@ module Kosher
 
       context "when condition is not kosher" do
         before do
-          offer.condition = Fabricate(:kosher_condition, :in_words => "acceptable")
+          offer.condition = Fabricate(:kosher_condition, :grade => 5)
         end
 
         it "returns false" do

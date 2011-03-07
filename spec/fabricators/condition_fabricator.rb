@@ -1,7 +1,7 @@
 Fabricator(:kosher_condition, :class_name => 'kosher/condition') do
-  in_words "new"
+  grade 1
 end
 
 Fabricator(:unkosher_condition, :class_name => 'kosher/condition') do
-  in_words "acceptable"
+  grade 5
 end
