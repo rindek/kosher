@@ -28,6 +28,11 @@ module Kosher
         end.should_not raise_error
       end
 
+      it "populates the offer listing ID" do
+        offer = Offer.build(doc)
+        offer.listing_id.should_not be_nil
+      end
+
       it "should handle blank descriptions" do
         doc['OfferAttributes']['ConditionNote'] = ''
         offer = Offer.build(doc)
