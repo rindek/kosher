@@ -1,38 +1,45 @@
+require 'money'
+
 module Kosher
-  class Offer < Struct.new(
+  class Offer < Struct.new \
+    :id,
     :seller,
     :condition,
     :description,
-    :ships_in,
-    :ships_free,
-    :cents,
-    :exchange_id,
-    :listing_id)
+    :hours_shipped,
+    :price_in_cents,
+    :shipping_in_cents,
+    :currency
+    :url
 
-    def self.build(doc)
-      offer             = new
-      offer.seller      = Seller.build(doc['Merchant'])
+    include Comparable
 
-      attributes        = doc['OfferAttributes']
-      offer.condition   = Condition.new(attributes['SubCondition'])
-      offer.description = Description.new(attributes['ConditionNote'].to_s)
+    def <=>(another)
+      if self.kosher? != another.kosher?
+        self.kosher? ? 1 : -1
+      else
+        -(self.final_price.exchange_to(Config.base_currency) <=> another.final_price.exchange_to(Config.base_currency))
+      end
+    end
 
-      listing           = doc['OfferListing']
-      offer.ships_in    = listing['AvailabilityAttributes']['MaximumHours'].to_i
-      offer.ships_free  = listing['IsEligibleForSuperSaverShipping'] == '1'
-      offer.cents       = listing['Price']['Amount'].to_i
-      offer.exchange_id = listing['ExchangeId']
-      offer.listing_id  = listing['OfferListingId']
+    def available?
+      hours_shipped.to_i <= Config.max_hours_shipped
+    end
 
-      offer
+    def final_price
+      price + shipping
     end
 
     def kosher?
-      condition.kosher? && seller.kosher? && description.kosher? && ships_now?
+      condition.kosher? && seller.kosher? && description.kosher? && available?
     end
 
-    def ships_now?
-      ships_in.to_i <= 48
+    def price
+      Money.new(price_in_cents, currency)
+    end
+
+    def shipping
+      Money.new(shipping_in_cents.to_i, currency)
     end
   end
 end

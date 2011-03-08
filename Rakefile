@@ -1,12 +1,13 @@
 require 'bundler'
-require 'rspec/core/rake_task'
+require 'rake/testtask'
 
 Bundler::GemHelper.install_tasks
 
-desc 'Run all specs in spec directory'
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = 'spec/**/*_spec.rb'
+task :default => :test
+
+desc "Run the test suite"
+task :test do
+  Dir['test/**/*_test.rb'].each do |f|
+    ruby(f)
+  end
 end
-
-task :default => :spec
-

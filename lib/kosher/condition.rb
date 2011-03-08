@@ -1,21 +1,18 @@
 module Kosher
-  class Condition < Struct.new(:grade)
-
-    alias_method :to_i, :grade
-
-    CONDITIONS = {
-      'new'        => 1,
-      'mint'       => 2,
-      'verygood'   => 3,
-      'good'       => 4,
-      'acceptable' => 5 }
-
-    def initialize(string = '')
-      self.grade = CONDITIONS[string] || 6
+  class Condition < Struct.new :grade
+    def self.from_amazon(text)
+      new case text
+          when 'new'        then 1
+          when 'mint'       then 2
+          when 'verygood'   then 3
+          when 'good'       then 4
+          when 'acceptable' then 5
+          else 6
+          end
     end
 
     def kosher?
-      grade <= 4
+      grade <= Config.min_condition
     end
 
     def new?

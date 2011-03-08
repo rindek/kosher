@@ -7,18 +7,10 @@ module Kosher
     REVIEW_COPY = "\\b(?:uncorrected|advanced?\\sreview|arc)\\b"
 
     def kosher?
-      !(present? && bad?)
-   end
+      !(damaged? || ex_library? || marked? || missing_volume? || review_copy?)
+    end
 
     private
-
-    def bad?
-      damaged?        ||
-      ex_library?     ||
-      marked?         ||
-      missing_volume? ||
-      review_copy?
-    end
 
     def damaged?
       matches(DAMAGED)
@@ -46,10 +38,6 @@ module Kosher
 
     def negation_of(value)
       "(?:no|not an?)\\s+#{value}"
-    end
-
-    def present?
-      self != ''
     end
 
     def review_copy?

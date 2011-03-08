@@ -1,29 +1,13 @@
 module Kosher
-  class Seller < Struct.new(:merchant_id, :name, :average_rating)
-    class << self
-      attr_accessor :blacklist
-
-      def build(doc)
-        merchant_id    = doc['MerchantId']
-        name           = doc['Name']
-        average_rating = doc['AverageFeedbackRating'].to_f
-
-        new(merchant_id, name, average_rating)
-      end
-    end
-
-    def blacklist
-      self.class.blacklist
-    end
-
+  class Seller < Struct.new :id, :name, :average_rating
     def blacklisted?
-      blacklist.include?(merchant_id) rescue false
+      Config.blacklist.include?(id)
     end
 
     def kosher?
       return false if blacklisted?
 
-      average_rating == 0.0 || average_rating > 4.7
+      average_rating.to_f == 0.0 || average_rating >= Config.min_average_rating
     end
   end
 end
