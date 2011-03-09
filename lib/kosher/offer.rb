@@ -1,5 +1,5 @@
 module Kosher
-  class Offer < Struct.new(:id, :url, :item, :seller, :shipping)
+  class Offer < Struct.new(:id, :item, :seller, :shipping)
     include Comparable
 
     def <=>(other)
