@@ -102,8 +102,8 @@ module Kosher
               @another_offer.stub!(:price).and_return(Money.new(150, 'EUR'))
             end
 
-            it "is greater than other offer" do
-              @offer.should be > @another_offer
+            it "is less than other offer" do
+              @offer.should be < @another_offer
             end
           end
 
@@ -122,8 +122,8 @@ module Kosher
               @another_offer.stub!(:price).and_return(Money.new(50, 'EUR'))
             end
 
-            it "is less than the other offer" do
-              @offer.should be < @another_offer
+            it "is greater than the other offer" do
+              @offer.should be > @another_offer
             end
           end
         end
@@ -145,13 +145,13 @@ module Kosher
             @another_offer.stub!(:kosher?).and_return(false)
           end
 
-          context "when it has a higher price" do
+          context "when it has a lower price" do
             before do
               @another_offer.stub!(:price).and_return(Money.new(150, 'EUR'))
             end
 
-            it "is greater than the other offer" do
-              @offer.should > @another_offer
+            it "is less than the other offer" do
+              @offer.should < @another_offer
             end
           end
 
@@ -165,13 +165,13 @@ module Kosher
             end
           end
 
-          context "when it has a lower price" do
+          context "when it has a higher price" do
             before do
               @another_offer.stub!(:price).and_return(Money.new(50, 'EUR'))
             end
 
-            it "is less than the other offer" do
-              @offer.should < @another_offer
+            it "is greater than the other offer" do
+              @offer.should > @another_offer
             end
           end
         end

@@ -7,7 +7,7 @@ module Kosher
         self.kosher? ? 1 : -1
       else
         currency = base_currency
-        -(self.price.exchange_to(currency) <=> other.price.exchange_to(currency))
+        self.price.exchange_to(currency) <=> other.price.exchange_to(currency)
       end
     end
 
