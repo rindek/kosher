@@ -93,15 +93,13 @@ module Kosher
 
         context "when the other offer is kosher as well" do
           before do
-            @offer.item = Item.new(100, 'EUR')
-            @offer.shipping = Shipping.new(0, 'EUR')
+            @offer.stub!(:price).and_return(Money.new(100, 'EUR'))
             @another_offer.stub!(:kosher?).and_return(true)
-            @another_offer.shipping = Shipping.new(0, 'EUR')
           end
 
           context "when it has a lower price" do
             before do
-              @another_offer.item = Item.new(150, 'EUR')
+              @another_offer.stub!(:price).and_return(Money.new(150, 'EUR'))
             end
 
             it "is greater than other offer" do
@@ -111,7 +109,7 @@ module Kosher
 
           context "when the prices are equal" do
             before do
-              @another_offer.item = Item.new(100, 'EUR')
+              @another_offer.stub!(:price).and_return(Money.new(100, 'EUR'))
             end
 
             it "is equal to the other offer" do
@@ -121,7 +119,7 @@ module Kosher
 
           context "when it has a higher price" do
             before do
-              @another_offer.item = Item.new(50, 'EUR')
+              @another_offer.stub!(:price).and_return(Money.new(50, 'EUR'))
             end
 
             it "is less than the other offer" do
@@ -143,15 +141,13 @@ module Kosher
 
         context "when the other offer is not kosher either" do
           before do
-            @offer.item = Item.new(100, 'EUR')
-            @offer.shipping = Shipping.new(0, 'EUR')
+            @offer.stub!(:price).and_return(Money.new(100, 'EUR'))
             @another_offer.stub!(:kosher?).and_return(false)
-            @another_offer.shipping = Shipping.new(0, 'EUR')
           end
 
           context "when it has a higher price" do
             before do
-              @another_offer.item = Item.new(150, 'EUR')
+              @another_offer.stub!(:price).and_return(Money.new(150, 'EUR'))
             end
 
             it "is greater than the other offer" do
@@ -161,7 +157,7 @@ module Kosher
 
           context "when the prices are equal" do
             before do
-              @another_offer.item = Item.new(100, 'EUR')
+              @another_offer.stub!(:price).and_return(Money.new(100, 'EUR'))
             end
 
             it "is equal to the other offer" do
@@ -171,7 +167,7 @@ module Kosher
 
           context "when it has a lower price" do
             before do
-              @another_offer.item = Item.new(50, 'EUR')
+              @another_offer.stub!(:price).and_return(Money.new(50, 'EUR'))
             end
 
             it "is less than the other offer" do
