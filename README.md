@@ -28,6 +28,6 @@ Usage
     offer.kosher?
     => true
 
-    offer.description = "Withdrawn library book"
+    offer.description = Description.new("Withdrawn library book")
     offer.kosher?
     => false
