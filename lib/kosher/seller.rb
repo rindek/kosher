@@ -1,5 +1,5 @@
 module Kosher
-  class Seller < Struct.new(:id, :name, :rating)
+  class Seller < Struct.new(:id, :name, :rating, :location)
     def blacklist
       @blacklist ||= []
     end
