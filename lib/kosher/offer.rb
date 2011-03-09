@@ -1,7 +1,7 @@
 require 'money'
 
 module Kosher
-  class Offer < Struct.new \
+  class Offer < Struct.new(
     :id,
     :seller,
     :condition,
@@ -9,8 +9,8 @@ module Kosher
     :hours_shipped,
     :price_in_cents,
     :shipping_in_cents,
-    :currency
-    :url
+    :currency,
+    :url)
 
     include Comparable
 

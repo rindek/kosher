@@ -1,17 +1,33 @@
 Kosher
 ======
 
-Kosher is an overengineered representation of an offer in a book market.
+Kosher models an offer by a bookseller.
 
-![Walter Benjamin](https://github.com/papercavalier/kosher/raw/master/walter_benjamin.jpg)
+It knows if the offer is good or bad. It also knows if the offer is
+better than another offer. It is somewhat overengineered.
+
+![Booksellers](http://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Bucharest_booksellers_2.jpg/600px-Bucharest_booksellers_2.jpg)
 
 Usage
 -----
 
     include Kosher
 
-    kosher_offer = Offer.new(,
-                             Seller.new('A2H6NH4SQYFZ4M',
-                                        'livrenoir',
-                                        4.8)
+    offer = Offer.new(1234,
+                       Seller.new('ABCDEF',
+                                  'John Doe Books',
+                                  4.8),
+                       Condition.new(1),
+                       Description.new('A fine copy'),
+                       48,
+                       1000,
+                       399,
+                       'USD',
+                       'http://bookseller.com/listings/1234'
 
+    offer.kosher?
+    => true
+
+    offer.description = "Withdrawn library book"
+    offer.kosher?
+    => false

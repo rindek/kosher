@@ -23,15 +23,15 @@ module Kosher
     end
 
     def max_hours_shipped=(hours)
-      @max_hours_shipped = hours.to_i
+      @max_hours_shipped = hours
     end
 
-    def min_average_rating
-      @min_average_rating ||= 4.8
+    def min_rating
+      @min_rating ||= 4.8
     end
 
-    def min_average_rating=(rating)
-      @min_average_rating = rating
+    def min_rating=(rating)
+      @min_rating = rating
     end
 
     def min_condition
@@ -39,7 +39,7 @@ module Kosher
     end
 
     def min_condition=(grade)
-      @min_condition = grade.to_i
+      @min_condition = grade
     end
   end
 end
