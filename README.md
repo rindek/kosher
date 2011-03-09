@@ -15,12 +15,12 @@ Usage
     offer.kosher?
     => true
     offer.price
-    => #<Money cents:1399 currency:EUR>
+    => #<Money cents:100 currency:EUR>
 
     another_offer.kosher?
     => true
     another_offer.price
-    => #<Money cents:1499 currency:EUR>
+    => #<Money cents:200 currency:EUR>
 
-    offer > another_offer
-    => true
+    [another_offer, offer].sort.map(&:price)
+    => [#<Money cents:100 currency:EUR>, #<Money cents:200 currency:EUR>]
