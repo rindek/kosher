@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Paper Cavalier']
   s.email       = 'code@papercavalier.com'
   s.homepage    = 'https://rubygems.org/gems/kosher'
-  s.summary     = %q{Wraps Amazon in a loving embrace.}
-  s.description = %q{Kosher wraps Amazon in a loving embrace.}
+  s.summary     = %q{A somewhat overengineered attempt to abstract bookselling into a set of models}
+  s.description = %q{Kosher is a somewhat overengineered attempt to abstract bookselling into a set of models.}
 
   s.rubyforge_project = 'kosher'
 
