@@ -1,5 +1,5 @@
 module Kosher
-  class Item < Struct.new(:cents, :currency, :condition, :description)
+  class Item < Struct.new(:cents, :currency, :quantity, :condition, :description)
     def kosher?
       condition.kosher? && description.kosher?
     end
