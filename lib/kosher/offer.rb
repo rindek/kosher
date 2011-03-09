@@ -4,7 +4,7 @@ module Kosher
 
     def <=>(other)
       if self.kosher? != other.kosher?
-        self.kosher? ? 1 : -1
+        self.kosher? ? -1 : 1
       else
         currency = base_currency
         self.price.exchange_to(currency) <=> other.price.exchange_to(currency)

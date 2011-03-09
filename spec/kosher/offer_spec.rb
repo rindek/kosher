@@ -86,9 +86,9 @@ module Kosher
           @offer.stub!(:kosher?).and_return(true)
         end
 
-        it "is greater than a non-kosher offer" do
+        it "is less than a non-kosher offer" do
           @another_offer.stub!(:kosher?).and_return(false)
-          @offer.should > @another_offer
+          @offer.should < @another_offer
         end
 
         context "when the other offer is kosher as well" do
@@ -134,9 +134,9 @@ module Kosher
           @offer.stub!(:kosher?).and_return(false)
         end
 
-        it "is less than a kosher offer" do
+        it "is greater than a kosher offer" do
           @another_offer.stub!(:kosher?).and_return(true)
-          @offer.should < @another_offer
+          @offer.should > @another_offer
         end
 
         context "when the other offer is not kosher either" do
