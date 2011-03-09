@@ -1,15 +1,19 @@
 module Kosher
-  class Condition
-    def initialize(grade)
-      @grade = grade
-    end
-
+  class Condition < Struct.new(:grade)
     def kosher?
-      @grade <= Config.min_condition
+      grade <= threshold
     end
 
     def new?
-      @grade == 1
+      grade == 1
+    end
+
+    def threshold
+      @threshold ||= 4
+    end
+
+    def threshold=(grade)
+      @threshold = grade
     end
 
     def used?

@@ -1,45 +1,30 @@
-require 'money'
-
 module Kosher
-  class Offer < Struct.new(
-    :id,
-    :seller,
-    :condition,
-    :description,
-    :hours_shipped,
-    :price_in_cents,
-    :shipping_in_cents,
-    :currency,
-    :url)
-
+  class Offer < Struct.new(:id, :url, :item, :seller, :shipping)
     include Comparable
 
-    def <=>(another)
-      if self.kosher? != another.kosher?
+    def <=>(other)
+      if self.kosher? != other.kosher?
         self.kosher? ? 1 : -1
       else
-        -(self.final_price.exchange_to(Config.base_currency) <=> another.final_price.exchange_to(Config.base_currency))
+        currency = base_currency
+        -(self.price.exchange_to(currency) <=> other.price.exchange_to(currency))
       end
     end
 
-    def available?
-      hours_shipped.to_i <= Config.max_hours_shipped
+    def base_currency
+      @base_currency ||= 'EUR'
     end
 
-    def final_price
-      price + shipping
+    def base_currency=(currency)
+      @base_currency = currency
     end
 
     def kosher?
-      condition.kosher? && seller.kosher? && description.kosher? && available?
+      item.kosher? && seller.kosher? && shipping.kosher?
     end
 
     def price
-      Money.new(price_in_cents, currency)
-    end
-
-    def shipping
-      Money.new(shipping_in_cents.to_i, currency)
+      item.price + shipping.cost
     end
   end
 end

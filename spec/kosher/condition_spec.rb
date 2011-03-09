@@ -2,17 +2,27 @@ require 'spec_helper'
 
 module Kosher
   describe Condition do
+    before do
+      @condition = Condition.new
+    end
+
     describe "#kosher?" do
       before do
-        Config.min_condition = 1
+        @condition.threshold = 4
       end
 
-      it "returns true if condition is equal to or better than minimum condition" do
-        Condition.new(1).should be_kosher
+      context "when grade within threshold" do
+        it "returns true" do
+          @condition.grade = 4
+          @condition.should be_kosher
+        end
       end
 
-      it "returns false if condition is less than minimum condition" do
-        Condition.new(2).should_not be_kosher
+      context "when grade not within threshold" do
+        it "returns false" do
+          @condition.grade = 5
+          @condition.should_not be_kosher
+        end
       end
     end
   end

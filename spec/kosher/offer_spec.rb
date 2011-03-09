@@ -2,173 +2,181 @@ require 'spec_helper'
 
 module Kosher
   describe Offer do
-    let(:offer) { Offer.new }
+    before do
+      @offer = Offer.new
+      @offer.item = Item.new
+      @offer.seller = Seller.new
+      @offer.shipping = Shipping.new
+    end
 
     describe "#kosher?" do
-      describe "when condition is kosher" do
+      context "when item is kosher" do
         before do
-          offer.condition = Condition.new(1)
+          @offer.item.stub!(:kosher?).and_return(true)
         end
 
-        describe "when seller is kosher" do
+        context "when seller is kosher" do
           before do
-            offer.seller = Seller.new
+            @offer.seller.stub!(:kosher?).and_return(true)
           end
 
-          describe "when description is kosher" do
+          context "when shipping is kosher" do
             before do
-              offer.description = Description.new
+              @offer.shipping.stub!(:kosher?).and_return(true)
             end
 
-            describe "when offer ships now" do
-              it "returns true" do
-                offer.should be_kosher
-              end
-            end
-
-            describe "when offer does not ship now" do
-              before do
-                offer.hours_shipped = 72
-              end
-
-              it "returns false" do
-                offer.should_not be_kosher
-              end
+            it "returns true" do
+              @offer.should be_kosher
             end
           end
 
-          describe "when description is not kosher" do
+          context "when shipping is not kosher" do
             before do
-              offer.description = Description.new('Withdrawn library book')
+              @offer.shipping.stub!(:kosher?).and_return(false)
             end
 
             it "returns false" do
-              offer.should_not be_kosher
+              @offer.should_not be_kosher
             end
           end
         end
 
-        describe "when seller is not kosher" do
+        context "when seller is not kosher" do
           before do
-            offer.seller = Seller.new('foo', 'bar', 4.0)
+            @offer.seller.stub!(:kosher?).and_return(false)
           end
 
           it "returns false" do
-            offer.should_not be_kosher
+            @offer.should_not be_kosher
           end
         end
       end
 
-      describe "when condition is not kosher" do
+      context "when item is not kosher" do
         before do
-          offer.condition = Condition.new(5)
+          @offer.item.stub!(:kosher?).and_return(false)
         end
 
         it "returns false" do
-          offer.should_not be_kosher
-        end
-      end
-    end
-
-    describe "#available?" do
-      before do
-        Config.max_hours_shipped = 48
-      end
-
-      describe "when offer is expected to ship on time" do
-        it "returns true" do
-          offer.hours_shipped = 48
-          offer.should be_available
-        end
-      end
-
-      describe "when offer is not expected to ship on time" do
-        it "returns false" do
-          offer.hours_shipped = 96
-          offer.should_not be_available
+          @offer.should_not be_kosher
         end
       end
     end
 
     describe "#price" do
-      it "returns the price" do
-        offer.price_in_cents = 100
-        offer.currency = 'USD'
+      it "sum of item price and shipping cost" do
+        @offer.item.cents = 1000
+        @offer.item.currency = 'EUR'
 
-        offer.price.should be_kind_of Money
-        offer.price.format.should eql '$1.00'
+        @offer.shipping.cents = 399
+        @offer.shipping.currency = 'EUR'
+
+        @offer.price.cents.should eql 1399
+        @offer.price.currency.iso_code.should eql 'EUR'
       end
     end
 
     describe "#<=>" do
       before do
-        offer.condition = Condition.new(1)
-        offer.seller = Seller.new
-        offer.description = Description.new
-        offer.price_in_cents = 100
-        offer.currency = 'EUR'
-        @another_offer = offer.dup
+        @another_offer = Offer.new
       end
 
       context "when kosher" do
-        it "is greater than a non-kosher offer" do
-          @another_offer.condition = Condition.new(5)
-          offer.should be_kosher
-          @another_offer.should_not be_kosher
-
-          offer.should be > @another_offer
+        before do
+          @offer.stub!(:kosher?).and_return(true)
         end
 
-        context "when the other offer is kosher too" do
-          it "is greater than another kosher offer with a higher price" do
-            @another_offer.price_in_cents = 200
+        it "is greater than a non-kosher offer" do
+          @another_offer.stub!(:kosher?).and_return(false)
+          @offer.should be > @another_offer
+        end
 
-            offer.should be > @another_offer
+        context "when the other offer is kosher as well" do
+          before do
+            @offer.item = Item.new(100, 'EUR')
+            @offer.shipping = Shipping.new(0, 'EUR')
+            @another_offer.stub!(:kosher?).and_return(true)
+            @another_offer.shipping = Shipping.new(0, 'EUR')
           end
 
-          it "is equal to another kosher offer with an equal price" do
-            offer.should be == @another_offer
+          context "when it has a lower price" do
+            before do
+              @another_offer.item = Item.new(150, 'EUR')
+            end
+
+            it "is greater than other offer" do
+              @offer.should be > @another_offer
+            end
           end
 
-          it "is less than another kosher offer with a lower price" do
-            @another_offer.price_in_cents = 50
+          context "when the prices are equal" do
+            before do
+              @another_offer.item = Item.new(100, 'EUR')
+            end
 
-            offer.should be < @another_offer
+            it "is equal to the other offer" do
+              @offer.should <=> @another_offer
+            end
+          end
+
+          context "when it has a higher price" do
+            before do
+              @another_offer.item = Item.new(50, 'EUR')
+            end
+
+            it "is less than the other offer" do
+              @offer.should be < @another_offer
+            end
           end
         end
       end
 
       context "when not kosher" do
         before do
-          offer.condition = Condition.new(5)
+          @offer.stub!(:kosher?).and_return(false)
         end
 
         it "is less than a kosher offer" do
-          offer.should_not be_kosher
-          @another_offer.should be_kosher
-
-          offer.should be < @another_offer
+          @another_offer.stub!(:kosher?).and_return(true)
+          @offer.should be < @another_offer
         end
 
         context "when the other offer is not kosher either" do
           before do
-            @another_offer.condition = Condition.new(5)
+            @offer.item = Item.new(100, 'EUR')
+            @offer.shipping = Shipping.new(0, 'EUR')
+            @another_offer.stub!(:kosher?).and_return(false)
+            @another_offer.shipping = Shipping.new(0, 'EUR')
           end
 
-          it "is greater than another unkosher offer with a higher price" do
-            @another_offer.price_in_cents = 200
+          context "when it has a higher price" do
+            before do
+              @another_offer.item = Item.new(150, 'EUR')
+            end
 
-            offer.should be > @another_offer
+            it "is greater than the other offer" do
+              @offer.should > @another_offer
+            end
           end
 
-          it "is equal to another unkosher offer with an equal price" do
-            offer.should be == @another_offer
+          context "when the prices are equal" do
+            before do
+              @another_offer.item = Item.new(100, 'EUR')
+            end
+
+            it "is equal to the other offer" do
+              @offer.should <=> @another_offer
+            end
           end
 
-          it "is less than another unkosher offer with a lower price" do
-            @another_offer.price_in_cents = 50
+          context "when it has a lower price" do
+            before do
+              @another_offer.item = Item.new(50, 'EUR')
+            end
 
-            offer.should be < @another_offer
+            it "is less than the other offer" do
+              @offer.should < @another_offer
+            end
           end
         end
       end

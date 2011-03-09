@@ -14,8 +14,10 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = 'kosher'
 
+  s.add_dependency('json', '~> 1.5.1')
   s.add_dependency('money', '~> 3.6.1')
   s.add_development_dependency('rspec', '~> 2.5.0')
+  s.add_development_dependency('ruby-debug19', '~> 0.11.6')
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'rspec'
+require 'ruby-debug'
 
 require File.expand_path('../../lib/kosher', __FILE__)
 
