@@ -1,4 +1,3 @@
-require 'json'
 require 'money'
 
 require 'kosher/availability'

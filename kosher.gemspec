@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = 'kosher'
 
-  s.add_dependency('json', '~> 1.5.1')
   s.add_dependency('money', '~> 3.6.1')
   s.add_development_dependency('rspec', '~> 2.5.0')
   s.add_development_dependency('ruby-debug19', '~> 0.11.6')
