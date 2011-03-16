@@ -14,7 +14,7 @@ module Kosher
 
     describe "#blacklisted?" do
       before do
-        @seller.blacklist = ['foo']
+        Seller.blacklist = ['foo']
       end
 
       it "returns true if the seller is blacklisted" do
@@ -30,7 +30,7 @@ module Kosher
 
     describe "#kosher?" do
       before do
-        @seller.threshold = 4.8
+        Seller.threshold = 4.8
       end
 
       it "returns true if rating is 0.0" do
@@ -54,7 +54,7 @@ module Kosher
 
       it "returns false if seller is blacklisted" do
         @seller.id = ['foo']
-        @seller.blacklist = [@seller.id]
+        Seller.blacklist = [@seller.id]
         @seller.should_not be_kosher
       end
     end

@@ -1,5 +1,7 @@
 require 'money'
 
+require 'kosher/threshold'
+
 require 'kosher/availability'
 require 'kosher/condition'
 require 'kosher/description'

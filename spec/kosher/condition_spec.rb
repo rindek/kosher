@@ -8,7 +8,7 @@ module Kosher
 
     describe "#kosher?" do
       before do
-        @condition.threshold = 4
+        Condition.threshold = 4
       end
 
       context "when grade within threshold" do

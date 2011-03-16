@@ -8,7 +8,7 @@ module Kosher
 
     describe "#kosher?" do
       before do
-        @availability.threshold = 48
+        Availability.threshold = 48
       end
 
       context "when available within threshold" do
