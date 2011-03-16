@@ -1,7 +1,7 @@
 Kosher
 ======
 
-Kosher is a somewhat overengineered attempt to abstract bookselling
+Kosher is a somewhat overengineered attempt to abstract bookdealing
 into a set of models.
 
 Kosher knows if an offer is good or bad. It is also able to compare
