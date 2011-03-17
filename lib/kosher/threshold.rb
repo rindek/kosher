@@ -10,7 +10,7 @@ module Kosher
 
     module ClassMethods
       def threshold
-        @threshold ||= THRESHOLD
+        @threshold
       end
 
       def threshold=(value)

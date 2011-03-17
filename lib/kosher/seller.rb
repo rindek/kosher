@@ -2,7 +2,7 @@ module Kosher
   class Seller < Struct.new(:id, :name, :rating, :location)
     include Threshold
 
-    THRESHOLD = 4.8
+    self.threshold = 4.8
 
     class << self
       def blacklist
