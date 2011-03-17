@@ -3,7 +3,7 @@ module Kosher
     def best_kosher_offer
       offer = offers.sort.first
 
-      offer.kosher? ? offer : nil
+      (offer && offer.kosher?) ? offer : nil
     end
   end
 end

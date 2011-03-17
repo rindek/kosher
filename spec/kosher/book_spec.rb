@@ -66,6 +66,12 @@ module Kosher
           @book.best_kosher_offer.should be_nil
         end
       end
+
+      context "when there are no offers" do
+        it "returns nil" do
+          @book.best_kosher_offer.should be_nil
+        end
+      end
     end
   end
 end
