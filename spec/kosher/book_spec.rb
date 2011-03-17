@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 module Kosher
-  describe Snapshot do
+  describe Book do
     describe "#best_kosher_offer" do
       before do
-        @snapshot = Snapshot.new
-        @snapshot.offers = []
+        @book = Book.new
+        @book.offers = []
 
         @offer1 = Offer.new
         @offer2 = Offer.new
@@ -15,15 +15,15 @@ module Kosher
         before do
           @offer1.stub!(:kosher?).and_return(true)
           @offer1.stub!(:price).and_return(Money.new(200, 'EUR'))
-          @snapshot.offers << @offer1
+          @book.offers << @offer1
 
           @offer2.stub!(:kosher?).and_return(true)
           @offer2.stub!(:price).and_return(Money.new(100, 'EUR'))
-          @snapshot.offers << @offer2
+          @book.offers << @offer2
         end
 
         it "returns the kosher offer with the lower price" do
-          @snapshot.best_kosher_offer.should eql @offer2
+          @book.best_kosher_offer.should eql @offer2
         end
       end
 
@@ -31,15 +31,15 @@ module Kosher
         before do
           @offer1.stub!(:kosher?).and_return(true)
           @offer1.stub!(:price).and_return(Money.new(200, 'EUR'))
-          @snapshot.offers << @offer1
+          @book.offers << @offer1
 
           @offer2.stub!(:kosher?).and_return(false)
           @offer2.stub!(:price).and_return(Money.new(100, 'EUR'))
-          @snapshot.offers << @offer2
+          @book.offers << @offer2
         end
 
         it "returns the best kosher offer" do
-          @snapshot.best_kosher_offer.should eql @offer1
+          @book.best_kosher_offer.should eql @offer1
         end
       end
 
@@ -47,11 +47,11 @@ module Kosher
         before do
           @offer1.stub!(:kosher?).and_return(true)
           @offer1.stub!(:price).and_return(Money.new(100, 'EUR'))
-          @snapshot.offers << @offer1
+          @book.offers << @offer1
         end
 
         it "returns the kosher offer" do
-          @snapshot.best_kosher_offer.should eql @offer1
+          @book.best_kosher_offer.should eql @offer1
         end
       end
 
@@ -59,11 +59,11 @@ module Kosher
         before do
           @offer1.stub!(:kosher?).and_return(false)
           @offer1.stub!(:price).and_return(Money.new(100, 'EUR'))
-          @snapshot.offers << @offer1
+          @book.offers << @offer1
         end
 
         it "returns nil" do
-          @snapshot.best_kosher_offer.should be_nil
+          @book.best_kosher_offer.should be_nil
         end
       end
     end
