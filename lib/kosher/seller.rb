@@ -2,17 +2,12 @@ module Kosher
   class Seller < Struct.new(:id, :name, :rating, :location)
     include Threshold
 
-    self.threshold = 4.8
-
     class << self
-      def blacklist
-        @blacklist ||= []
-      end
-
-      def blacklist=(ids)
-        @blacklist = ids
-      end
+      attr_accessor :blacklist
     end
+
+    self.threshold = 4.8
+    self.blacklist = []
 
     def blacklist
       self.class.blacklist

@@ -2,17 +2,11 @@ module Kosher
   class Offer < Struct.new(:id, :item, :seller, :shipping)
     include Comparable
 
-    BASE_CURRENCY = 'EUR'
-
     class << self
-      def base_currency
-        @base_currency ||= BASE_CURRENCY
-      end
-
-      def base_currency=(currency)
-        @base_currency = currency
-      end
+      attr_accessor :base_currency
     end
+
+    self.base_currency = 'EUR'
 
     def <=>(other)
       if self.kosher? != other.kosher?

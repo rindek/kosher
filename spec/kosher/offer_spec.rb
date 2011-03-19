@@ -9,6 +9,12 @@ module Kosher
       @offer.shipping = Shipping.new
     end
 
+    describe "#base_currency" do
+      it "defaults to EUR" do
+        @offer.base_currency.should eql 'EUR'
+      end
+    end
+
     describe "#kosher?" do
       context "when item is kosher" do
         before do
