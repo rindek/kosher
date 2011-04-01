@@ -9,14 +9,12 @@ Gem::Specification.new do |s|
   s.authors     = ['Paper Cavalier']
   s.email       = 'code@papercavalier.com'
   s.homepage    = 'https://rubygems.org/gems/kosher'
-  s.summary     = %q{A somewhat overengineered attempt to abstract bookdealing into a set of models}
-  s.description = %q{Kosher is a somewhat overengineered attempt to abstract bookdealing into a set of models.}
+  s.summary     = %q{A somewhat overengineered attempt to abstract bookselling into a set of models}
+  s.description = %q{Kosher is a somewhat overengineered attempt to abstract bookselling into a set of models.}
 
   s.rubyforge_project = 'kosher'
 
   s.add_dependency('money', '~> 3.6.1')
-  s.add_development_dependency('rspec', '~> 2.5.0')
-  s.add_development_dependency('ruby-debug19', '~> 0.11.6')
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
