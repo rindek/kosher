@@ -1,7 +1,7 @@
 module Kosher
-  class Offer < Struct.new(:id, :item, :seller, :shipping)
 
   # A used or new offer of a book by a dealer or store.
+  class Offer < Struct.new(:id, :item, :seller, :shipping, :human_readable)
     include Comparable
 
     class << self
