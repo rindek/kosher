@@ -11,7 +11,7 @@ module Kosher
 
     describe "#base_currency" do
       it "defaults to EUR" do
-        @offer.base_currency.should eql 'EUR'
+        @offer.send(:base_currency).should eql 'EUR'
       end
     end
 
