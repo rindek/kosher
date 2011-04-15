@@ -22,7 +22,7 @@ module Kosher
           @book.offers << @offer2
         end
 
-        it "returns the kosher offer with the lower price" do
+        it "returns the kosher offer with the lowest price" do
           @book.best_kosher_offer.should eql @offer2
         end
       end
@@ -38,7 +38,7 @@ module Kosher
           @book.offers << @offer2
         end
 
-        it "returns the best kosher offer" do
+        it "returns the kosher offer" do
           @book.best_kosher_offer.should eql @offer1
         end
       end
