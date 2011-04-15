@@ -1,5 +1,6 @@
 module Kosher
-  class Book < Struct.new(:venue, :isbn, :asin, :sales_rank, :offers_total, :offers, :created_at)
+  class Book < Struct.new(:venue, :isbn, :asin, :offers_total, :offers)
+
     def best_kosher_offer
       offer = offers.sort.first
 
