@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 module Kosher
-  describe HumanReadable
+  describe Readable
 end
