@@ -1,5 +1,6 @@
 module Kosher
   class Description < Struct.new(:text)
+
     DAMAGED     = "\\b(?:missing|torn|broken|split|discard|withdrawn|rent|stain|school|damaged|water)"
     EXLIB       = "(?:e?x|discarded|retired|former|has|have)[\\s._-]*lib"
     MARKED      = "(highlight|hilit|underlin)"
