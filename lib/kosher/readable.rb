@@ -1,4 +1,6 @@
+require 'ostruct'
+
 module Kosher
-  class Readable < Struct.new(:price, :description)
+  class Readable < OpenStruct
   end
 end
