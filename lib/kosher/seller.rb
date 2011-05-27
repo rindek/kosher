@@ -1,22 +1,25 @@
 module Kosher
-  class Seller < Struct.new(:id, :name, :rating, :location)
+
+  # The seller offering a book on a venue.
+  #
+  # A seller may have a location.
+  class Seller < Structure
     include Threshold
 
-    class << self
-      attr_accessor :blacklist
-    end
+    key :id
+    key :name
+    key :rating, :type => Float
+    key :location, :type => Structure
 
-    self.threshold = 4.8
-    self.blacklist = []
-
-    def blacklist
-      self.class.blacklist
-    end
-
+    # Returns whether we blacklist the seller.
     def blacklisted?
-      blacklist.include?(id)
+      Kosher.seller_blacklist.include? id
     end
 
+    # Returns whether the seller is kosher.
+    #
+    # A seller is kosher as long as he is not blacklisted and his rating is
+    # unknown, 0.0, or above our minimum threshold.
     def kosher?
       !blacklisted? && (rating.to_f == 0.0 || rating >= threshold)
     end

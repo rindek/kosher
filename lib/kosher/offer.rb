@@ -1,17 +1,16 @@
 module Kosher
 
-  # An offer by a book seller.
-  class Offer < Struct.new(:id, :venue, :item, :seller, :shipping, :readable)
-
+  # An offer.
+  #
+  # This is an actual item offered on a particular venue by a seller.
+  class Offer < Structure
     include Comparable
 
-    class << self
-
-      # The base currency.
-      attr_accessor :base_currency
-    end
-
-    self.base_currency = 'EUR'
+    key :id
+    key :venue
+    key :item, :type => Structure
+    key :seller, :type => Structure
+    key :shipping, :type => Structure
 
     # Compares offer with another offer.
     #
@@ -21,29 +20,20 @@ module Kosher
       if kosher? != other.kosher?
         kosher? ? -1 : 1
       else
-        exchanged_price <=> other.exchanged_price
+        price <=> other.price
       end
     end
 
-    # The price exchanged to the base currency.
-    def exchanged_price
-      price.exchange_to(base_currency)
-    end
-
     # Returns whether the offer is kosher.
+    #
+    # An offer is kosher if its item, seller, and shipping are kosher.
     def kosher?
       item.kosher? && seller.kosher? && shipping.kosher?
     end
 
-    # The total price, including the shipping cost.
+    # The total price of an offer.
     def price
       item.price + shipping.cost
-    end
-
-    private
-
-    def base_currency
-      self.class.base_currency
     end
   end
 end

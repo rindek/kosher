@@ -1,5 +1,8 @@
 module Kosher
-  class Description < Struct.new(:text)
+
+  # The seller's description of the offer.
+  class Description < Structure
+    key :text, :default => ''
 
     DAMAGED     = "\\b(?:missing|torn|broken|split|discard|withdrawn|rent|stain|school|damaged|water)"
     EXLIB       = "(?:e?x|discarded|retired|former|has|have)[\\s._-]*lib"
@@ -8,7 +11,7 @@ module Kosher
     REVIEW_COPY = "\\b(?:uncorrected|advanced?\\sreview|arc)\\b"
 
     def damaged?
-      matches?(DAMAGED)
+      matches? DAMAGED
     end
 
     def ex_lib?
@@ -16,7 +19,7 @@ module Kosher
     end
 
     def kosher?
-      !(damaged? || ex_lib? || marked? || missing_volume? || review_copy?)
+      !damaged? && !ex_lib? && !marked? && !missing_volume? && !review_copy?
     end
 
     def marked?
@@ -24,11 +27,11 @@ module Kosher
     end
 
     def missing_volume?
-      matches?(MISSING_VOL)
+      matches? MISSING_VOL
     end
 
     def review_copy?
-      matches?(REVIEW_COPY)
+      matches? REVIEW_COPY
     end
 
     private

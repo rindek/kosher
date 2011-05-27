@@ -1,8 +1,12 @@
 module Kosher
-  class Availability < Struct.new(:hours, :preorder)
+
+  # The availability of an offer.
+  #
+  # This represents within how many hours an offer is expected to ship out.
+  class Availability < Structure
     include Threshold
 
-    self.threshold = 48
+    key :hours, :type => Integer
 
     # Returns whether the availability is kosher.
     #

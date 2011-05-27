@@ -4,17 +4,14 @@ module Kosher
   describe Item do
     before do
       @item = Item.new
+      @item.condition = Condition.new(:grade => 1)
     end
 
     describe "#kosher?" do
       context "when condition is kosher" do
-        before do
-          @item.condition = Condition.new(1)
-        end
-
         context "when description is kosher" do
           before do
-            @item.description = Description.new('')
+            @item.description = Description.new
           end
 
           it "returns true" do
@@ -24,7 +21,8 @@ module Kosher
 
         context "when description is not kosher" do
           before do
-            @item.description = Description.new('Withdrawn library book')
+            @item.description = Description.new(
+              :text => 'Withdrawn library book')
           end
 
           it "returns false" do
@@ -35,11 +33,21 @@ module Kosher
 
       context "when condition is not kosher" do
         before do
-          @item.condition = Condition.new(5)
+          @item.condition.grade = 5
         end
 
         it "returns false" do
           @item.should_not be_kosher
+        end
+      end
+    end
+
+    describe "#price" do
+      context "when no cents are specified" do
+        it "raises an error" do
+          expect do
+            @item.price
+          end.to raise_error TypeError
         end
       end
     end

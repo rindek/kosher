@@ -6,15 +6,9 @@ module Kosher
       @seller = Seller.new
     end
 
-    describe "#blacklist" do
-      it "defaults to an empty array" do
-        @seller.blacklist.should eql []
-      end
-    end
-
     describe "#blacklisted?" do
       before do
-        Seller.blacklist = ['foo']
+        Kosher.seller_blacklist = ['foo']
       end
 
       it "returns true if the seller is blacklisted" do
@@ -54,7 +48,7 @@ module Kosher
 
       it "returns false if seller is blacklisted" do
         @seller.id = ['foo']
-        Seller.blacklist = [@seller.id]
+        Kosher.seller_blacklist = [@seller.id]
         @seller.should_not be_kosher
       end
     end

@@ -11,23 +11,29 @@ module Kosher
         Availability.threshold = 48
       end
 
-      context "true" do
-        it "when available within threshold" do
+      context "when available within threshold" do
+        before do
           @availability.hours = 48
+        end
+
+        it "returns true" do
           @availability.should be_kosher
         end
       end
 
-      context "false" do
-        after { @availability.should_not be_kosher }
-
-        it "when not available within threshold" do
+      context "when not available within threshold" do
+        before do
           @availability.hours = 96
         end
 
-        it "when available for preorder" do
-          @availability.hours = 48
-          @availability.preorder = true
+        it "should return false" do
+          @availability.should_not be_kosher
+        end
+      end
+
+      context "when availability is not known" do
+        it "should return false" do
+          @availability.should_not be_kosher
         end
       end
     end

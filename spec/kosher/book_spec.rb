@@ -5,7 +5,6 @@ module Kosher
     describe "#best_kosher_offer" do
       before do
         @book = Book.new
-        @book.offers = []
 
         @offer1 = Offer.new
         @offer2 = Offer.new

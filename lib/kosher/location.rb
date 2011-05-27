@@ -1,4 +1,8 @@
 module Kosher
-  class Location < Struct.new(:country, :state)
+
+  # The location of a seller.
+  class Location < Structure
+    key :country
+    key :state
   end
 end

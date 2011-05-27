@@ -9,13 +9,7 @@ module Kosher
     end
 
     module ClassMethods
-      def threshold
-        @threshold
-      end
-
-      def threshold=(value)
-        @threshold = value
-      end
+      attr_accessor :threshold
     end
   end
 end
