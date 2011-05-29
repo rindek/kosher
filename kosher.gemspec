@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
 
  {
     'money'         => '~> 3.6.1',
-    'structure'     => '~> 0.5.0'
+    'structure'     => '~> 0.7.0'
   }.each do |lib, version|
     s.add_runtime_dependency lib, version
   end
