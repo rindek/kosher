@@ -14,10 +14,10 @@ module Kosher
     key      :publisher
     key      :title
     key      :volumes,      :type => Integer
-    has_many :alternate_versions
+    has_many :other_editions
     has_many :authors
     has_many :offers
-    has_many :related_items
+    has_many :similar_books
 
     # The best kosher offer.
     #
