@@ -6,10 +6,10 @@ module Kosher
   class Seller < Structure
     include Threshold
 
-    key :id
-    key :name
-    key :rating, :type => Float
-    key :location, :type => Structure
+    key     :id
+    key     :name
+    key     :rating, :type => Float
+    has_one :location
 
     # Returns whether we blacklist the seller.
     def blacklisted?

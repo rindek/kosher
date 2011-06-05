@@ -3,9 +3,9 @@ module Kosher
   #
   # Shipping costs something (or nothing) and is subject to availability.
   class Shipping < Structure
-    key :cents, :type => Integer
-    key :currency
-    key :availability, :type => Structure
+    key     :cents, :type => Integer
+    key     :currency
+    has_one :availability
 
     # Returns whether the item ships for free.
     def free?

@@ -6,11 +6,11 @@ module Kosher
   class Offer < Structure
     include Comparable
 
-    key :id
-    key :venue
-    key :item, :type => Structure
-    key :seller, :type => Structure
-    key :shipping, :type => Structure
+    key     :id
+    key     :venue
+    has_one :item
+    has_one :seller
+    has_one :shipping
 
     # Compares offer with another offer.
     #

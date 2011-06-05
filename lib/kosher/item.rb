@@ -4,11 +4,11 @@ module Kosher
   #
   # An item has a price, quantity, condition, and description.
   class Item < Structure
-    key :cents, :type => Integer
-    key :currency
-    key :quantity, :type => Integer
-    key :condition, :type => Structure
-    key :description, :type => Structure
+    key     :cents, :type => Integer
+    key     :currency
+    key     :quantity, :type => Integer
+    has_one :condition
+    has_one :description
 
     def kosher?
       condition.kosher? && description.kosher?
