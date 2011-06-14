@@ -7,7 +7,7 @@ module Kosher
     include Comparable
 
     key     :id
-    key     :venue
+    has_one :venue
     has_one :item
     has_one :seller
     has_one :shipping

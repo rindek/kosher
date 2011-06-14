@@ -20,6 +20,7 @@ require 'kosher/location'
 require 'kosher/offer'
 require 'kosher/seller'
 require 'kosher/shipping'
+require 'kosher/venue'
 
 module Kosher
   class << self
