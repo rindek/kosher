@@ -9,21 +9,21 @@ Gem::Specification.new do |s|
   s.authors     = ['Paper Cavalier']
   s.email       = 'code@papercavalier.com'
   s.homepage    = 'https://rubygems.org/gems/kosher'
-  s.summary     = %q{A somewhat overengineered attempt to abstract bookselling into a set of models}
-  s.description = %q{Kosher is a somewhat overengineered attempt to abstract bookselling into a set of models.}
+  s.summary     = %q{An overengineered attempt to abstract bookselling into a set of models}
+  s.description = %q{Kosher is an overengineered attempt to abstract bookselling into a set of models.}
 
   s.rubyforge_project = 'kosher'
 
  {
-    'rspec'         => '~> 2.6.0',
+    'rspec'         => '~> 2.6',
     'ruby-debug19'  => '~> 0.11.6'
   }.each do |lib, version|
     s.add_development_dependency lib, version
   end
 
  {
-    'money'         => '~> 3.6.1',
-    'structure'     => '~> 0.7.0'
+    'money'         => '~> 3.6',
+    'structure'     => '~> 0.7.1'
   }.each do |lib, version|
     s.add_runtime_dependency lib, version
   end
