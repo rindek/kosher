@@ -8,7 +8,7 @@ module Kosher
 
     describe "#blacklisted?" do
       before do
-        Kosher.seller_blacklist = ['foo']
+        Kosher.seller_blacklist << 'foo'
       end
 
       it "returns true if the seller is blacklisted" do
@@ -48,7 +48,7 @@ module Kosher
 
       it "returns false if seller is blacklisted" do
         @seller.id = ['foo']
-        Kosher.seller_blacklist = [@seller.id]
+        Kosher.seller_blacklist << @seller.id
         @seller.should_not be_kosher
       end
     end

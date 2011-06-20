@@ -22,10 +22,8 @@ require 'kosher/venue'
 
 module Kosher
   class << self
-    attr_writer :seller_blacklist
-
     def seller_blacklist
-      @seller_blacklist ||= []
+      @seller_blacklist ||= Array.new
     end
   end
 
