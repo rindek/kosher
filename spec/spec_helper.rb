@@ -1,8 +1,5 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'rspec'
-require 'ruby-debug'
 
-require File.expand_path('../../lib/kosher', __FILE__)
-
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+trequire File.expand_path('../../lib/kosher', __FILE__)
