@@ -65,11 +65,8 @@ module Kosher
 
     describe "#price" do
       it "sum of item price and shipping cost" do
-        @offer.item.cents = 1000
-        @offer.item.currency = 'EUR'
-
-        @offer.shipping.cents = 399
-        @offer.shipping.currency = 'EUR'
+        @offer.item.price    = Price.new(cents: 1000, currency: 'EUR')
+        @offer.shipping.cost = Price.new(cents: 399, currency: 'EUR')
 
         @offer.price.cents.should eql 1399
         @offer.price.currency.iso_code.should eql 'EUR'

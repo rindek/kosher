@@ -41,15 +41,5 @@ module Kosher
         end
       end
     end
-
-    describe "#price" do
-      context "when no cents are specified" do
-        it "raises an error" do
-          expect do
-            @item.price
-          end.to raise_error TypeError
-        end
-      end
-    end
   end
 end

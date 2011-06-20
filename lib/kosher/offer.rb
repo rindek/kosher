@@ -1,8 +1,6 @@
 module Kosher
 
   # An offer.
-  #
-  # This is an actual item offered on a particular venue by a seller.
   class Offer < Structure
     include Comparable
 
@@ -33,7 +31,7 @@ module Kosher
 
     # The total price of an offer.
     def price
-      item.price + shipping.cost
+      item.price.to_money + shipping.cost.to_money
     end
   end
 end
