@@ -9,10 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Paper Cavalier']
   s.email       = 'code@papercavalier.com'
   s.homepage    = 'https://rubygems.org/gems/kosher'
-  s.summary     = %q{An overengineered attempt to abstract bookselling into a set of models}
-  s.description = %q{Kosher is an overengineered attempt to abstract bookselling into a set of models.}
-
-  s.rubyforge_project = 'kosher'
+  s.summary     = %q{An overengineered abstraction of book trading}
+  s.description = %q{Kosher abstracts online book trading into a set of models.}
 
  {
     'rspec'         => '~> 2.6',
@@ -21,7 +19,7 @@ Gem::Specification.new do |s|
   end
 
  {
-    'money'         => '~> 3.6',
+    'money'         => '~> 3.7.1',
     'structure'     => '~> 0.7.1'
   }.each do |lib, version|
     s.add_runtime_dependency lib, version
