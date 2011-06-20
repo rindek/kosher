@@ -9,12 +9,9 @@ require 'structure/json'
 require 'kosher/threshold'
 
 # Require the models.
-require 'kosher/author'
 require 'kosher/availability'
-require 'kosher/book'
 require 'kosher/condition'
 require 'kosher/description'
-require 'kosher/image'
 require 'kosher/item'
 require 'kosher/location'
 require 'kosher/offer'
