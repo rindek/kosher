@@ -1,13 +1,8 @@
 module Kosher
-
-  # A price.
-  class Price < Structure
-    key :cents, :type => Integer
-    key :currency
-
+  class Price < Struct.new(:cents, :currency)
     def to_money
       raise TypeError, "Cannot render money" unless cents
-      Money.new(cents, currency)
+      Money.new(cents.to_i, currency)
     end
   end
 end

@@ -1,19 +1,17 @@
 module Kosher
-
-  # An offer.
-  class Offer < Structure
+  class Offer < Struct.new(:id, :venue, :item, :seller, :shipping)
     include Comparable
 
-    key     :id
-    has_one :venue
-    has_one :item
-    has_one :seller
-    has_one :shipping
+    class << self
+      def hooks
+        @hooks ||= Array.new
+      end
 
-    # Compares offer with another offer.
-    #
-    # A kosher offer is better than an unkosher offer. If both offers are
-    # kosher or unkosher, a lower-priced offer is better.
+      def kosher_if(&block)
+        @hooks << block
+      end
+    end
+
     def <=>(other)
       if kosher? != other.kosher?
         kosher? ? -1 : 1
@@ -22,16 +20,18 @@ module Kosher
       end
     end
 
-    # Returns whether the offer is kosher.
-    #
-    # An offer is kosher if its item, seller, and shipping are kosher.
     def kosher?
-      item.kosher? && seller.kosher? && shipping.kosher?
+      item.kosher? && seller.kosher? && shipping.kosher? && otherwise_kosher?
     end
 
-    # The total price of an offer.
     def price
       item.price.to_money + shipping.cost.to_money
+    end
+
+    private
+
+    def otherwise_kosher?
+      Offer.hooks.all? { |hook| hook.call(self) }
     end
   end
 end

@@ -9,18 +9,17 @@ Gem::Specification.new do |s|
   s.authors     = ['Paper Cavalier']
   s.email       = 'code@papercavalier.com'
   s.homepage    = 'https://rubygems.org/gems/kosher'
-  s.summary     = %q{An overengineered abstraction of book trading}
-  s.description = %q{Kosher abstracts online book trading into a set of models.}
+  s.summary     = %q{An abstraction of online book trading}
+  s.description = %q{An abstraction of online book trading}
 
- {
-    'rspec'         => '~> 2.6',
+  {
+    'rake'          => '~> 0.9',
   }.each do |lib, version|
     s.add_development_dependency lib, version
   end
 
- {
-    'money'         => '~> 3.7.1',
-    'structure'     => '~> 0.8.0'
+  {
+    'money'         => '~> 3.7.1'
   }.each do |lib, version|
     s.add_runtime_dependency lib, version
   end

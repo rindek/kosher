@@ -1,34 +1,11 @@
-# Kosher is a somewhat overengineered attempt to abstract bookdealing into a
-# set of models.
-
+require 'json'
+require 'json/add/core'
 require 'money'
-require 'structure'
-require 'structure/json'
 
-# Require this module before all models.
-require 'kosher/threshold'
+require 'kosher/helpers'
 
-# Require the models.
-require 'kosher/availability'
-require 'kosher/condition'
-require 'kosher/description'
 require 'kosher/item'
-require 'kosher/location'
 require 'kosher/offer'
 require 'kosher/price'
 require 'kosher/seller'
 require 'kosher/shipping'
-require 'kosher/venue'
-
-module Kosher
-  class << self
-    def seller_blacklist
-      @seller_blacklist ||= Array.new
-    end
-  end
-
-  # Set threshold defaults.
-  Availability.threshold = 48
-  Condition.threshold    = 4
-  Seller.threshold       = 4.8
-end
