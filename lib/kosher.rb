@@ -1,11 +1,13 @@
-require 'json'
-require 'json/add/core'
+require 'active_model'
 require 'money'
+require 'structure'
 
-require 'kosher/helpers'
-
-require 'kosher/item'
-require 'kosher/offer'
-require 'kosher/price'
-require 'kosher/seller'
-require 'kosher/shipping'
+module Kosher
+  autoload :Invalid,    'kosher/invalid'
+  autoload :Item,       'kosher/item'
+  autoload :Offer,      'kosher/offer'
+  autoload :Seller,     'kosher/seller'
+  autoload :Shipping,   'kosher/shipping'
+  autoload :Unit,       'kosher/unit'
+  autoload :Venue,      'kosher/venue'
+end

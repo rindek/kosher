@@ -1,37 +1,31 @@
 module Kosher
-  class Offer < Struct.new(:id, :venue, :item, :seller, :shipping)
+  class Offer < Structure
+    include ActiveModel::Validations
     include Comparable
 
-    class << self
-      def hooks
-        @hooks ||= Array.new
-      end
+    key :id
+    one :seller
+    one :shipping
+    one :unit
+    key :venue_id, Integer
 
-      def kosher_if(&block)
-        @hooks << block
-      end
-    end
+    validates_presence_of :seller, :shipping, :unit, :venue_id
 
     def <=>(other)
       if kosher? != other.kosher?
         kosher? ? -1 : 1
       else
-        price <=> other.price
+        total <=> other.total
       end
     end
 
     def kosher?
-      item.kosher? && seller.kosher? && shipping.kosher? && otherwise_kosher?
+      raise InvalidRecord.new(self) unless valid?
+      seller.kosher? && shipping.kosher? && unit.kosher?
     end
 
     def price
-      item.price.to_money + shipping.cost.to_money
-    end
-
-    private
-
-    def otherwise_kosher?
-      Offer.hooks.all? { |hook| hook.call(self) }
+      unit.price + shipping.cost
     end
   end
 end
