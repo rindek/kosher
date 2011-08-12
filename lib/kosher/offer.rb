@@ -9,7 +9,7 @@ module Kosher
     one :unit
     key :venue_id, Integer
 
-    validates_presence_of :seller, :shipping, :unit, :venue_id
+    validates_presence_of :seller, :shipping, :unit, :venue
 
     def <=>(other)
       if kosher? != other.kosher?
@@ -20,12 +20,16 @@ module Kosher
     end
 
     def kosher?
-      raise InvalidRecord.new(self) unless valid?
+      raise Invalid.new(self) unless valid?
       seller.kosher? && shipping.kosher? && unit.kosher?
     end
 
     def price
       unit.price + shipping.cost
+    end
+
+    def venue
+      Venue.find(venue_id)
     end
   end
 end
