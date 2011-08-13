@@ -59,4 +59,8 @@ class TestKosher < MiniTest::Unit::TestCase
     offer.venue_id = 0
     assert_raises(Kosher::Invalid) { offer.kosher? }
   end
+
+  def test_amazon_venues
+    assert_equal 8, Kosher::Venue.amazon.size
+  end
 end

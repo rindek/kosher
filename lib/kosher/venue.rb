@@ -9,5 +9,11 @@ module Kosher
 
     # The country the venue is based in.
     key :country
+
+    class << self
+      def amazon
+        @amazons ||= select { |record| record.name.include? 'Amazon' }
+      end
+    end
   end
 end
