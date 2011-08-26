@@ -1,7 +1,7 @@
 module Kosher
   class Venue < Structure
-    key :country
-    key :name
+    key :country, String
+    key :name,    String
 
     set_data_file File.expand_path("../../../data/venues.yml", __FILE__)
 

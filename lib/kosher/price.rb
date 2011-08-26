@@ -9,6 +9,7 @@ module Kosher
     end
 
     def price
+      validate!
       Money.new(cents, currency)
     end
   end

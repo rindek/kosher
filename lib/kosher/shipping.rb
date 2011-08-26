@@ -1,5 +1,6 @@
 module Kosher
-  class Shipping < Base
+  class Shipping < Structure
+    include Filter
     include Price
 
     key :available, Boolean
