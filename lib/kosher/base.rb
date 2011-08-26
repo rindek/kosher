@@ -10,7 +10,7 @@ module Kosher
 
     def kosher?
       unless valid?
-        raise StandardError.new(errors.full_messages.join(", "))
+        raise StandardError.new(errors.full_messages.join(', '))
       end
 
       kosher
