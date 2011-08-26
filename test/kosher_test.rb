@@ -3,60 +3,58 @@ require 'minitest/autorun'
 
 require_relative '../lib/kosher'
 
+begin
+  require 'ruby-debug'
+  rescue LoadError
+end
+
+include Kosher
+
 class TestKosher < MiniTest::Unit::TestCase
-  def test_unit_price
-    unit = Kosher::Unit.new(:cents    => '100',
-                            :currency => 'JPY')
-    assert_equal '¥1.00', unit.price.format
+  def test_prices
+    unit = Unit.new(:cents    => '1000',
+                    :currency => 'EUR')
+    assert_equal '10,00 €', unit.price.format
+
+    shipping = Shipping.new(:cents    => '300',
+                            :currency => 'EUR')
+    assert_equal '3,00 €', shipping.price.format
+
+    offer = Offer.new(:shipping => shipping,
+                      :unit     => unit)
+    assert_equal '13,00 €', offer.price.format
   end
 
-  def test_shipping_cost
-    shipping = Kosher::Shipping.new(:cents    => '100',
-                                    :currency => 'EUR')
-    assert_equal '1,00 €', shipping.cost.format
-  end
+  def test_venues
+    assert_equal 'Amazon.com',   Venue.find(1).name
+    assert_equal 'Amazon.co.uk', Venue.find(2).name
 
-  def test_offer_price
-    shipping = Kosher::Shipping.new(:cents    => 100,
-                                    :currency => 'USD')
-    unit = Kosher::Unit.new(:cents    => 100,
-                            :currency => 'USD')
-    offer = Kosher::Offer.new(:shipping => shipping,
-                              :unit     => unit)
-    assert_equal '$2.00', offer.price.format
-  end
-
-  def test_venue
-    assert_equal 'Amazon.com', Kosher::Venue.find(1).name
-    assert_equal 'Amazon.co.uk', Kosher::Venue.find(2).name
-  end
-
-  def test_venue_in_offer
-    offer = Kosher::Offer.new(:venue_id => 1)
-    assert_equal Kosher::Venue.find(1), offer.venue
+    offer = Offer.new(:venue_id => 1)
+    assert_equal Venue.find(1), offer.venue
   end
 
   def test_validation
-    assert_raises(Kosher::Invalid) { Kosher::Unit.new.kosher? }
-    unit = Kosher::Unit.new(:condition => 1,
-                            :cents     => 100,
-                            :currency  => 'USD')
+    assert_raises(StandardError) { Unit.new.kosher? }
+    unit = Unit.new(:condition => 1,
+                    :cents     => 100,
+                    :currency  => 'USD')
     assert unit.kosher?
 
-    assert_raises(Kosher::Invalid) { Kosher::Shipping.new.kosher? }
-    shipping = Kosher::Shipping.new(:available => true,
-                                    :cents     => 100,
-                                    :currency  => 'USD')
+    assert_raises(StandardError) { Shipping.new.kosher? }
+    shipping = Shipping.new(:available => true,
+                            :cents     => 100,
+                            :currency  => 'USD')
     assert shipping.kosher?
 
-    assert_raises(Kosher::Invalid) { Kosher::Offer.new.kosher? }
-    offer = Kosher::Offer.new(:unit     => unit,
-                              :shipping => shipping,
-                              :seller   => Kosher::Seller.new,
-                              :venue_id => 1)
-    assert offer.kosher?
+    assert_raises(StandardError) { Seller.new.kosher? }
+    seller = Seller.new(:name => 'John Doe')
+    assert seller.kosher?
 
-    offer.venue_id = 0
-    assert_raises(Kosher::Invalid) { offer.kosher? }
+    assert_raises(NoMethodError) { Offer.new.kosher? }
+    offer = Offer.new(:unit     => unit,
+                      :shipping => shipping,
+                      :seller   => seller,
+                      :venue_id => 1)
+    assert offer.kosher?
   end
 end

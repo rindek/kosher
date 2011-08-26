@@ -1,28 +1,20 @@
 module Kosher
   class Unit < Structure
-    include ActiveModel::Validations
+    include Base
+    include Price
 
-    key :cents,      Integer
-    key :condition,  Integer
-    key :currency
-    key :description
-    key :kosher,     Boolean, :default => true
-    key :quantity,   Integer, :default => 1
+    key :condition,   Integer
+    key :description, String
+    key :quantity,    Integer, :default => 1
 
-    validates_inclusion_of    :condition, :in => 1..6
-    validates_numericality_of :cents,
-                              :greater_than => 0
-    validates_presence_of     :currency
+    validates_inclusion_of :condition, :in => 1..6
 
-    # Returns whether the item is kosher.
-    def kosher?
-      raise Invalid.new(self) unless valid?
-      kosher
+    def new?
+      condition == 1
     end
 
-    # Item price.
-    def price
-      Money.new(cents, currency)
+    def used?
+      !new?
     end
   end
 end

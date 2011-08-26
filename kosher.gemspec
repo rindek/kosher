@@ -9,13 +9,15 @@ Gem::Specification.new do |s|
   s.authors     = ['Hakan Ensari']
   s.email       = 'code@papercavalier.com'
   s.homepage    = 'https://github.com/hakanensari/kosher'
-  s.summary     = %q{Online trade, abstracted}
-  s.description = %q{Online trade, abstracted}
+  s.summary     = %q{Online selling, abstracted}
+  s.description = %q{Online selling, abstracted}
 
   {
-    'activemodel' => '~> 3.0',
-    'money'       => '~> 3.7',
-    'structure'   => '~> 0.15'
+    'activesupport' => '~> 3.0',
+    'activemodel'   => '~> 3.0',
+    'certainty'     => '~> 0.2',
+    'money'         => '~> 3.7',
+    'structure'     => '~> 0.18'
   }.each do |lib, version|
     s.add_runtime_dependency lib, version
   end
