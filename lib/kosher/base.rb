@@ -1,11 +1,10 @@
 module Kosher
-  module Base
-    extend ActiveSupport::Concern
+  class Base < Structure
     include ActiveModel::Validations
 
-    included do
-      key :foo
-      key :kosher, Boolean, :default => true
+    def self.inherited(child)
+      child.key :foo
+      child.key :kosher, Boolean, :default => true
     end
 
     def kosher?

@@ -1,14 +1,11 @@
 module Kosher
   module Price
-    extend ActiveSupport::Concern
+    def self.included(base)
+      base.key :cents,    Integer
+      base.key :currency, String
 
-    included do
-      key :cents,    Integer
-      key :currency, String
-
-      validates_presence_of     :currency
-      validates_numericality_of :cents,
-                                :greater_than => 0
+      base.validates_presence_of     :currency
+      base.validates_numericality_of :cents, :greater_than => 0
     end
 
     def price

@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
   s.description = %q{Online selling, abstracted}
 
   {
-    'activesupport' => '~> 3.0',
     'activemodel'   => '~> 3.0',
     'certainty'     => '~> 0.2',
     'money'         => '~> 3.7',

@@ -1,6 +1,5 @@
 module Kosher
-  class Unit < Structure
-    include Base
+  class Unit < Base
     include Price
 
     key :condition,   Integer

@@ -1,7 +1,5 @@
 module Kosher
-  class Seller < Structure
-    include Base
-
+  class Seller < Base
     key :id
     key :name
     key :rating, Float
