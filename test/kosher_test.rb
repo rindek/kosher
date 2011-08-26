@@ -57,4 +57,8 @@ class TestKosher < MiniTest::Unit::TestCase
                       :venue_id => 1)
     assert offer.kosher?
   end
+
+  def test_amazon_venues
+    assert_equal 8, Venue.amazon.size
+  end
 end
