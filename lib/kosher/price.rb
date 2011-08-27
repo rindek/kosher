@@ -1,3 +1,5 @@
+require 'money'
+
 module Kosher
   module Price
     def self.included(base)

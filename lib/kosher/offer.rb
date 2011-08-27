@@ -1,3 +1,5 @@
+require 'certainty'
+
 require 'kosher/filter'
 require 'kosher/price'
 
