@@ -58,6 +58,12 @@ class TestKosher < MiniTest::Unit::TestCase
     assert offer.kosher?
   end
 
+  def test_venues
+    assert_kind_of Venue, Venue.first
+    assert 'Amazon.com', Venue.find(1).name
+    assert_nil Venue.find(0)
+  end
+
   def test_amazon_venues
     assert_equal 8, Venue.amazon.size
   end

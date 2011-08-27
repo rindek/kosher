@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     'activemodel'   => '~> 3.0',
     'certainty'     => '~> 0.2',
     'money'         => '~> 3.7',
-    'structure'     => '~> 0.18'
+    'structure'     => '~> 0.19'
   }.each do |lib, version|
     s.add_runtime_dependency lib, version
   end
