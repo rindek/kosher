@@ -4,7 +4,7 @@ require 'minitest/autorun'
 require_relative '../lib/kosher'
 
 begin
-  require 'ruby-debug'
+  require 'pry'
   rescue LoadError
 end
 
