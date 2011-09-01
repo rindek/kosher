@@ -31,7 +31,8 @@ module Kosher
     end
 
     def kosher?
-      validate!
+      raise_error_if_invalid
+
       [seller, shipping, detail].all?(&:kosher?)
     end
 

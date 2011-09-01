@@ -1,21 +1,21 @@
 require 'active_model'
 require 'structure'
 
-module Kosher
-  class NotValid < StandardError
+class Structure
+  class InvalidRecord < StandardError
     def initialize(record)
-      super(record.errors.full_messages.join(', '))
+      msg = record.errors.full_messages.join(', ')
+      super msg
     end
   end
-end
 
 class Structure
   include ActiveModel::Validations
 
   private
 
-  def validate!
-    raise NotValid.new(self) unless valid?
+  def raise_error_if_invalid
+    raise InvalidRecord.new(self) if invalid?
   end
 end
 

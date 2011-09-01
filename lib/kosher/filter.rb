@@ -5,7 +5,8 @@ module Kosher
     end
 
     def kosher?
-      validate!
+      raise_error_if_invalid
+
       kosher
     end
   end

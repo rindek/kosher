@@ -35,21 +35,21 @@ class TestKosher < MiniTest::Unit::TestCase
   end
 
   def test_validation
-    assert_raises(NotValid) { Detail.new.kosher? }
+    assert_raises(Structure::InvalidRecord) { Detail.new.kosher? }
     detail = Detail.new(:condition => 1)
     assert detail.kosher?
 
-    assert_raises(NotValid) { Shipping.new.kosher? }
+    assert_raises(Structure::InvalidRecord) { Shipping.new.kosher? }
     shipping = Shipping.new(:available => true,
                             :cents     => 100,
                             :currency  => 'USD')
     assert shipping.kosher?
 
-    assert_raises(NotValid) { Seller.new.kosher? }
+    assert_raises(Structure::InvalidRecord) { Seller.new.kosher? }
     seller = Seller.new(:name => 'John Doe')
     assert seller.kosher?
 
-    assert_raises(NotValid) { Offer.new.kosher? }
+    assert_raises(Structure::InvalidRecord) { Offer.new.kosher? }
     offer = Offer.new(:detail   => detail,
                       :shipping => shipping,
                       :seller   => seller,
