@@ -11,8 +11,13 @@ class Structure
     end
   end
 
-class Structure
+  include ActiveModel::Conversion
   include ActiveModel::Validations
+  extend  ActiveModel::Naming
+
+  def persisted?
+    false
+  end
 
   private
 
