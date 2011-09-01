@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Hakan Ensari']
   s.email       = 'code@papercavalier.com'
   s.homepage    = 'https://github.com/hakanensari/kosher'
-  s.summary     = %q{Online selling, abstracted}
-  s.description = %q{Online selling, abstracted}
+  s.summary     = %q{I filter stuff.}
+  s.description = %q{I filter stuff.}
 
   {
     'activemodel'   => '~> 3.0',
