@@ -1,4 +1,6 @@
 require 'active_model'
+require 'certainty'
+require 'money'
 require 'structure'
 
 class Structure
