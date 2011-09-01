@@ -6,5 +6,7 @@ module Kosher
     key :available, Boolean
 
     validates_presence_of :available
+
+    alias available? available
   end
 end
