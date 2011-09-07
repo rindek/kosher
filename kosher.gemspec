@@ -9,14 +9,14 @@ Gem::Specification.new do |s|
   s.authors     = ['Hakan Ensari']
   s.email       = 'code@papercavalier.com'
   s.homepage    = 'https://github.com/hakanensari/kosher'
-  s.summary     = %q{I filter stuff.}
-  s.description = %q{I filter stuff.}
+  s.summary     = %q{I filter things.}
+  s.description = %q{I filter things.}
 
   {
-    'activemodel'   => '~> 3.0',
+    'activemodel'   => '~> 3.1',
     'certainty'     => '~> 0.2',
     'money'         => '~> 3.7',
-    'structure'     => '~> 0.19'
+    'structure'     => '~> 0.20'
   }.each do |lib, version|
     s.add_runtime_dependency lib, version
   end

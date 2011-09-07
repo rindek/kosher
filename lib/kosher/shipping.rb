@@ -7,6 +7,9 @@ module Kosher
 
     validates_presence_of :available
 
-    alias available? available
+    def available?
+      validate!
+      available
+    end
   end
 end

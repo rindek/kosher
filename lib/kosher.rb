@@ -6,14 +6,13 @@ require 'structure'
 class Structure
   class InvalidRecord < StandardError
     def initialize(record)
-      msg = record.errors.full_messages.join(', ')
-      super msg
+      super record.errors.full_messages.join(', ')
     end
   end
 
   include ActiveModel::Conversion
   include ActiveModel::Validations
-  extend  ActiveModel::Naming
+  extend ActiveModel::Naming
 
   def persisted?
     false
@@ -21,9 +20,17 @@ class Structure
 
   private
 
-  def raise_error_if_invalid
+  def validate!
     raise InvalidRecord.new(self) if invalid?
   end
 end
 
-require 'kosher/offer'
+module Kosher
+  autoload :Condition, 'kosher/condition'
+  autoload :Filter,    'kosher/filter'
+  autoload :Offer,     'kosher/offer'
+  autoload :Price,     'kosher/price'
+  autoload :Seller,    'kosher/seller'
+  autoload :Shipping,  'kosher/shipping'
+  autoload :Unit,      'kosher/unit'
+end

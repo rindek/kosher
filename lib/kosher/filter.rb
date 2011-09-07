@@ -1,12 +1,11 @@
 module Kosher
   module Filter
     def self.included(base)
-      base.key :kosher, Boolean, :default => true
+      base.key :kosher, Boolean, true
     end
 
     def kosher?
-      raise_error_if_invalid
-
+      validate!
       kosher
     end
   end

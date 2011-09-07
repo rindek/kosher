@@ -1,24 +1,15 @@
-require 'kosher/filter'
-require 'kosher/price'
-
-require 'kosher/detail'
-require 'kosher/seller'
-require 'kosher/shipping'
-require 'kosher/unit'
-require 'kosher/venue'
-
 module Kosher
   class Offer < Structure
     include Comparable
 
-    key :id,       String
-    key :detail,   Detail
-    key :seller,   Seller
+    key :id, String
+    key :condition, Condition
+    key :seller, Seller
     key :shipping, Shipping
-    key :unit,     Unit
-    key :venue_id, Integer
+    key :unit, Unit
+    key :venue, String
 
-    validates_presence_of :detail, :seller, :shipping, :unit, :venue
+    validates_presence_of :condition, :seller, :shipping, :unit, :venue
 
     def <=>(other)
       if kosher? != other.kosher?
@@ -29,17 +20,12 @@ module Kosher
     end
 
     def kosher?
-      raise_error_if_invalid
-
-      [seller, shipping, detail].all?(&:kosher?)
+      validate!
+      [seller, shipping, condition].all?(&:kosher?)
     end
 
     def price
       unit.price + shipping.price
-    end
-
-    def venue
-      Venue.find(venue_id)
     end
   end
 end
