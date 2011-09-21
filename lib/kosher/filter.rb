@@ -1,12 +1,10 @@
 module Kosher
   module Filter
     def self.included(base)
-      base.key :kosher, Boolean, true
-    end
-
-    def kosher?
-      validate!
-      kosher
+      base.instance_eval do
+        key :kosher, Boolean, true
+        alias_method :kosher?, :kosher
+      end
     end
   end
 end

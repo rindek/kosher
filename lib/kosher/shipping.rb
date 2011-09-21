@@ -5,11 +5,6 @@ module Kosher
 
     key :available, Boolean
 
-    validates_presence_of :available
-
-    def available?
-      validate!
-      available
-    end
+    alias_method :available?, :available
   end
 end

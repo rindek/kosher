@@ -2,14 +2,12 @@ module Kosher
   class Offer < Structure
     include Comparable
 
-    key :id, String
+    key :id
     key :condition, Condition
-    key :seller, Seller
-    key :shipping, Shipping
-    key :unit, Unit
-    key :venue, String
-
-    validates_presence_of :condition, :seller, :shipping, :unit, :venue
+    key :seller,    Seller
+    key :shipping,  Shipping
+    key :unit,      Unit
+    key :venue,     String
 
     def <=>(other)
       if kosher? != other.kosher?
@@ -20,7 +18,6 @@ module Kosher
     end
 
     def kosher?
-      validate!
       [seller, shipping, condition].all?(&:kosher?)
     end
 
