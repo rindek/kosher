@@ -1,15 +1,8 @@
-require 'active_model'
 require 'certainty'
 require 'money'
 require 'structure'
 
 class Structure
-  include ActiveModel::Conversion
-  extend  ActiveModel::Naming
-
-  def persisted?
-    false
-  end
 end
 
 module Kosher

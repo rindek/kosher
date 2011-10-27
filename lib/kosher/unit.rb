@@ -1,7 +1,10 @@
 module Kosher
   class Unit < Structure
-    include Price
+    key :cents, Integer
+    key :currency, String
 
-    key :quantity, Integer, 1
+    def price
+      Money.new(cents, currency)
+    end
   end
 end

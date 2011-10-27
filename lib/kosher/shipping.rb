@@ -1,10 +1,10 @@
 module Kosher
   class Shipping < Structure
-    include Filter
-    include Price
+    key :cents, Integer
+    key :currency
 
-    key :available, Boolean
-
-    alias_method :available?, :available
+    def cost
+      Money.new(cents, currency)
+    end
   end
 end
