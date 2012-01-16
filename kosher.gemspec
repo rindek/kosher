@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
 
   {
     'certainty'     => '~> 0.2',
-    'money'         => '~> 3.7',
-    'structure'     => '~> 0.22'
+    'money'         => '~> 4.0',
+    'structure'     => '~> 0.24'
   }.each do |lib, version|
     s.add_runtime_dependency lib, version
   end

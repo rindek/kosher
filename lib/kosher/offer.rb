@@ -2,14 +2,11 @@ module Kosher
   class Offer < Structure
     include Comparable
 
-    key :kosher, Boolean
-    key :new, Boolean
-    key :shipping, Shipping
-    key :seller
-    key :unit, Unit
-
-    alias kosher? kosher
-    alias new? new
+    one :condition
+    one :shipping
+    one :seller
+    one :unit
+    one :venue
 
     def <=>(other)
       if kosher? != other.kosher?
@@ -17,6 +14,10 @@ module Kosher
       else
         price <=> other.price
       end
+    end
+
+    def kosher?
+      condition.kosher? && seller.kosher? && shipping.kosher?
     end
 
     def price
