@@ -1,6 +1,6 @@
 module Kosher
   class Shipping < Structure
-    key :available, default: true
+    key :available, default: false
     key :cents, Integer
     key :currency
     key :fast, default: false

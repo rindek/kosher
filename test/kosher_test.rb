@@ -38,13 +38,14 @@ class TestKosher < MiniTest::Unit::TestCase
 
     condition.kosher = true
     seller.kosher = true
+    shipping.available = true
     assert offer.kosher?
   end
 
   def test_offer_price
     unit = Unit.new(cents: 100, currency: 'USD')
-    ship = Shipping.new(cents: 100, currency: 'USD')
-    offer = Offer.new(unit: unit, shipping: ship)
+    shipping = Shipping.new(cents: 100, currency: 'USD')
+    offer = Offer.new(unit: unit, shipping: shipping)
     assert_equal 200, offer.price.cents
     assert_equal 'USD', offer.price.currency.iso_code
   end
