@@ -17,7 +17,7 @@ module Kosher
     end
 
     def kosher?
-      condition.kosher? && seller.kosher? && shipping.kosher?
+      condition.kosher? && seller.kosher? && shipping.available?
     end
 
     def price

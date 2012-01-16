@@ -16,7 +16,5 @@ module Kosher
     def fast?
       Boolean(fast)
     end
-
-    alias kosher? available?
   end
 end
