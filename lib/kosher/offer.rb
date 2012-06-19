@@ -1,12 +1,25 @@
-module Kosher
-  class Offer < Structure
-    include Comparable
+require 'ostruct'
+require 'virtus'
 
-    one :condition
-    one :shipping
-    one :seller
-    one :unit
-    one :venue
+require 'kosher/condition'
+require 'kosher/description'
+require 'kosher/item'
+require 'kosher/seller'
+require 'kosher/shipping'
+
+module Kosher
+  class Offer
+    include Comparable
+    include Virtus
+
+    KOSHER_ATTRIBUTES = %w(condition description seller shipping)
+
+    attribute :condition, Condition
+    attribute :description, Description
+    attribute :item, Item
+    attribute :seller, Seller
+    attribute :shipping, Shipping
+    attribute :venue, OpenStruct, default: OpenStruct.new
 
     def <=>(other)
       if kosher? != other.kosher?
@@ -17,11 +30,17 @@ module Kosher
     end
 
     def kosher?
-      condition.kosher? && seller.kosher? && shipping.available?
+      KOSHER_ATTRIBUTES.all? do |key|
+        unless attribute = self[key]
+          raise TypeError, "#{key} missing"
+        end
+
+        attribute.kosher?
+      end
     end
 
     def price
-      unit.price + shipping.cost
+      item.price + shipping.price
     end
   end
 end

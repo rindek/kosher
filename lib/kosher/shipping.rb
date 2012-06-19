@@ -1,20 +1,14 @@
+require 'kosher/price'
+
 module Kosher
-  class Shipping < Structure
-    key :available, default: false
-    key :cents, Integer
-    key :currency
-    key :fast, default: false
+  class Shipping
+    include Price
 
-    def available?
-      Boolean(available)
-    end
+    attribute :available, Boolean, default: true
+    attribute :fast, Boolean, default: false
 
-    def cost
-      Money.new(cents, currency)
-    end
-
-    def fast?
-      Boolean(fast)
+    def kosher?
+      available?
     end
   end
 end

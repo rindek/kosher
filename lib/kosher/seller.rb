@@ -1,11 +1,17 @@
+require 'virtus'
+
+require 'kosher/seller/rating'
+
 module Kosher
-  class Seller < Structure
-    key :location
-    key :name
-    key :kosher, default: false
+  class Seller
+    include Virtus
+
+    attribute :id, String
+    attribute :name, String
+    attribute :rating, Rating
 
     def kosher?
-      Boolean(kosher)
+      rating.kosher?
     end
   end
 end
