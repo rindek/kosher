@@ -17,7 +17,7 @@ module Kosher
         it { should be_true }
       end
 
-      context ' given a grade less than 1' do
+      context ' given a grade worse than 1' do
         before do
           condition.grade = 2
         end
