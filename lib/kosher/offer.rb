@@ -31,10 +31,7 @@ module Kosher
 
     def kosher?
       KOSHER_ATTRIBUTES.all? do |key|
-        unless attribute = self[key]
-          raise TypeError, "#{key} missing"
-        end
-
+        attribute = self[key] or raise TypeError, "#{key} missing"
         attribute.kosher?
       end
     end
