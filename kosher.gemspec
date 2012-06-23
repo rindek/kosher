@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   {
     'rspec' => '~> 2.10.0'
-  }.each do |lib, ver|
+  }.each do |lib, version|
     s.add_development_dependency lib, version
   end
 
