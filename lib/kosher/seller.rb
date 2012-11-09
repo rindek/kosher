@@ -4,6 +4,6 @@ module Kosher
 
     attribute :id,       String
     attribute :name,     String
-    attribute :reliable, Boolean
+    attribute :reliable, Boolean, default: false
   end
 end
