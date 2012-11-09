@@ -1,43 +1,28 @@
-require 'ostruct'
-require 'virtus'
-
-require 'kosher/condition'
-require 'kosher/description'
-require 'kosher/item'
-require 'kosher/seller'
-require 'kosher/shipping'
-
 module Kosher
   class Offer
     include Comparable
     include Virtus
 
-    KOSHER_ATTRIBUTES = %w(condition description seller shipping)
-
-    attribute :condition, Condition
-    attribute :description, Description
-    attribute :item, Item
-    attribute :seller, Seller
-    attribute :shipping, Shipping
-    attribute :venue, OpenStruct, default: OpenStruct.new
+    attribute :dispatch,    Dispatch
+    attribute :item,        Item
+    attribute :marketplace, String
+    attribute :seller,      Seller
+    attribute :uri,         String
 
     def <=>(other)
-      if kosher? != other.kosher?
-        kosher? ? -1 : 1
-      else
-        price <=> other.price
-      end
+      price <=> other.price
     end
 
-    def kosher?
-      KOSHER_ATTRIBUTES.all? do |key|
-        attribute = self[key] or raise TypeError, "#{key} missing"
-        attribute.kosher?
-      end
+    def item_price
+      Money.new item.price.amount, item.price.currency
     end
 
     def price
-      item.price + shipping.price
+      item_price + dispatch_cost
+    end
+
+    def dispatch_cost
+      Money.new dispatch.cost.amount, dispatch.cost.currency
     end
   end
 end

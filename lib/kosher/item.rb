@@ -1,9 +1,10 @@
-require 'kosher/price'
-
 module Kosher
   class Item
-    include Price
+    include Virtus
 
-    attribute :quantity, Integer, default: 1
+    attribute :condition,   Integer
+    attribute :description, String
+    attribute :price,       Price
+    attribute :quantity,    Integer
   end
 end

@@ -1,12 +1,3 @@
-begin
-  require 'pry'
-rescue LoadError
-end
+require 'minitest/autorun'
 
-begin
-  require 'simplecov'
-  SimpleCov.start { add_filter '/spec/' }
-rescue LoadError
-end
-
-require 'rspec'
+require_relative '../lib/kosher'
