@@ -2,7 +2,8 @@ module Kosher
   class Dispatch
     include Virtus
 
-    attribute :time, Integer
     attribute :cost, Price
+    attribute :fast, Boolean
+    attribute :time, Integer
   end
 end
