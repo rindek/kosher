@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'money',  '~> 5.0'
   s.add_runtime_dependency 'virtus', '~> 0.5.2'
 
+  s.add_development_dependency 'rspec'
+
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ['lib']
