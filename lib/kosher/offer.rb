@@ -3,6 +3,7 @@ module Kosher
     include Comparable
     include Virtus
 
+    attribute :identifier,  String
     attribute :dispatch,    Dispatch
     attribute :item,        Item
     attribute :marketplace, String
