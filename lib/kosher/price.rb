@@ -1,6 +1,8 @@
-class Price
-  include Virtus
+module Kosher
+  class Price
+    include Virtus
 
-  attribute :amount,   Integer
-  attribute :currency, String
+    attribute :amount,   Integer
+    attribute :currency, String
+  end
 end
