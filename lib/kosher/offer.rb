@@ -14,12 +14,12 @@ module Kosher
       price <=> other.price
     end
 
-    def item_price
-      Money.new item.price.amount, item.price.currency
-    end
-
     def price
       item_price + dispatch_cost
+    end
+
+    def item_price
+      Money.new item.price.amount, item.price.currency
     end
 
     def dispatch_cost
