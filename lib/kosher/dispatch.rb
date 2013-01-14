@@ -5,6 +5,6 @@ module Kosher
     attribute :cost,     Price
     attribute :domestic, Boolean
     attribute :fast,     Boolean, default: false
-    attribute :time,     Integer, default: 2
+    attribute :time,     Integer
   end
 end
