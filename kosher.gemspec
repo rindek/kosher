@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/papercavalier/kosher'
   s.summary     = %q{Kosher}
 
-  s.add_runtime_dependency 'money',  '~> 5.0'
+  s.add_runtime_dependency 'money',  '~> 6.0'
   s.add_runtime_dependency 'virtus', '~> 0.5.4'
 
   s.add_development_dependency 'rspec'
